@@ -150,7 +150,7 @@ def RunEval(InputFile):
     os.system('RNAeval <' + InputFile + '>' + energiesFile)
     # Parse the RNAevaloutput to extract energy values
     lines = FF.Parsefile(energiesFile)
-    for i in xrange(1, len(lines), 2):
+    for i in range(1, len(lines), 2):
         # i is the stucture number and 'lines[i].split(" ")[1][1:-2]' is  the  corresponding  energy value
         # print 'holla',(lines[i].split(" ")[1][1:-2])
         Energy.append(lines[i].split(" ", 1)[1][1:-2])  # TODO ,1 is to get the first occurence of the space !!!

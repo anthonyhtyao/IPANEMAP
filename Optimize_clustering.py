@@ -63,13 +63,13 @@ def DefineNumberCluster(SVMLMatrix, Redundant, method, DM, BoltzmanFactor, Probi
             break
         # ************************************* second criterion
         '''
-        for elem1 in Centroids[nb - 1].keys():
+        for elem1 in list(Centroids[nb - 1].keys()):
             rep = []
             '''
             print "distance to all elements"
             print "Ref \t i \t i+1 \t BPdist \t CumulatedBz i \t CumulatedBz i+1 \t  CumulatedBzdist"
             '''
-            for elem2 in Centroids[nb].keys():
+            for elem2 in list(Centroids[nb].keys()):
                 rep.append((elem2, SF.DistanceTwoStructs(SF.BasePairsFromStruct(Centroids[nb - 1][elem1]),
                                                         SF.BasePairsFromStruct(Centroids[nb][elem2]))))
 
