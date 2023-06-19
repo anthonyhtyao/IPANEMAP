@@ -166,7 +166,7 @@ def MEA(BPp, rna):
 
 def MEA_algo(P_ss, BPp, rna):
     nb = len(rna)
-    W = [[-sys.maxint for j in range(nb)] for i in range(nb)]
+    W = [[-sys.maxsize for j in range(nb)] for i in range(nb)]
     for i in range(0, nb):
         W[i][i] = P_ss[i]
     for d in range(1, nb):
@@ -213,8 +213,8 @@ def CentroidBycluster(clusters, StructFile, Boltzmann, numberofsruct, constraint
 
     MatriceDistanceCentroids = scipy.zeros([dim_clustering, dim_clustering])
     MatriceDistanceClustersEucld = scipy.zeros([dim_clustering, dim_clustering])
-    for ClusterNumber in clusters.keys():
-        for ClusterNumber2 in clusters.keys():
+    for ClusterNumber in list(clusters.keys()):
+        for ClusterNumber2 in list(clusters.keys()):
             if ClusterNumber2 > ClusterNumber:
                 l = SF.DistanceTwoStructs(centroids[ClusterNumber], centroids[ClusterNumber2])
                 #print "BP_centoid_distances", "\t", ClusterNumber, "\t", ClusterNumber2, "\t", l
@@ -242,8 +242,8 @@ def SamplePresentInClusters(origine, occ, clusters, numberofsruct):
             origine[ClusterNumber][StructureNumber] = GetOrigineofStructure(StructureNumber, numberofsruct)
         # calculate occurence of conditions present whithin a cluster
     for ClusterNumber in clusters:
-        for ConditionInCluster in origine[ClusterNumber].values():
-            occ[ClusterNumber][ConditionInCluster] = origine[ClusterNumber].values().count(ConditionInCluster)
+        for ConditionInCluster in list(origine[ClusterNumber].values()):
+            occ[ClusterNumber][ConditionInCluster] = list(origine[ClusterNumber].values()).count(ConditionInCluster)
 
         return occ
 
@@ -277,7 +277,7 @@ def ClustersDistributions(clusters, Filename, constraintes, numberofsruct):
         o.write("%i\t%i\t" % (len(clusters[elem]), it[elem]))
         o.write("\n")
     o.write("Cluster(s) with  high number of  present conditions is(are) : %s" % (
-        [v + 1 for v in it.keys() if it[v] == max(it.values())]))
+        [v + 1 for v in list(it.keys()) if it[v] == max(it.values())]))
 
 
 # *************************!!!!!!!!!!!!!Pareto front*************************!!!!!!!!!!!!!!!!!!
@@ -287,7 +287,7 @@ def dominates(row, rowCandidate):
 
 def Pareto(Dico):
     cleareCluster = []
-    remaining = Dico.keys()
+    remaining = list(Dico.keys())
 
     while remaining:
         candidateKey = remaining.pop()

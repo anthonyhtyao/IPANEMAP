@@ -19,12 +19,12 @@ def a():
 def MiniBatchKMeans(SVMLMatrix, n_clusters):
     clusters = defaultdict(a)
     # clusters_clean= defaultdict(a)
-    X, y = np.array(load_svmlight_file(SVMLMatrix))
+    X, y = load_svmlight_file(SVMLMatrix)
     # print X,y
     algorithm = cluster.MiniBatchKMeans(n_clusters=n_clusters)  # The cas eof 2 clusters is calculated
     algorithm.fit(X)
     if hasattr(algorithm, 'labels_'):
-        y_pred = algorithm.labels_.astype(np.int)
+        y_pred = algorithm.labels_.astype(int)
     else:
         y_pred = algorithm.predict(X)
     for i in range(len(y_pred)):

@@ -123,7 +123,7 @@ if __name__ == "__main__":
             cond = conf.Conditions[0]
             ProbingPath = FF.LocateSoftConstraintFile(RNAName, cond)
 
-        for index in (CentroidStructure.keys()):
+        for index in (list(CentroidStructure.keys())):
             progress.Print("%s\t%s\t%s\t%s\t%s" % (index+1, CentroidStructure[index], Centroids_Energies[index],
                                                    CardinalConditions[index], CumulBE[index]))
             if conf.DrawCentroids:

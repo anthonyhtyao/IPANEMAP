@@ -22,7 +22,7 @@ def ThreeD_MatDistance_Boltzmann(MatDist, Klust, Boltzmannprobabilty, numberofsr
     results = mds.fit(adist)
     coords = results.embedding_
     plt.subplots_adjust(bottom=0.1)
-    for k, col in zip(range(len(Klust)), colors):
+    for k, col in zip(list(range(len(Klust))), colors):
         pos = -1
         for i in Klust[k]:
             pos += 1
@@ -71,7 +71,7 @@ def threedcentoids(MatDist, Centroids_Energies, ListDiameters):
     results = mds.fit(adist)
     coords = results.embedding_
     plt.subplots_adjust(bottom=0.1)
-    for k, col in zip(range(len(MatDist)), colors):
+    for k, col in zip(list(range(len(MatDist))), colors):
         ax.scatter(coords[k, 0], coords[k, 1], Centroids_Energies[k], c=col, marker='.')
         # ax.add_patch(mpatches.Circle((coords[k, 0], coords[k, 1]),ListDiameters/2,color=col,edgecolor="black"))
         ax.text(coords[k, 0], coords[k, 1], Centroids_Energies[k], 'C%s' % (k + 1), color=col)
@@ -96,7 +96,7 @@ def plotDistanceClusters(D, clusters, coloro, title):
     fig = plt.figure()
     plt.subplots_adjust(bottom=0.1)
     plt.scatter(coords[:, 0], coords[:, 1], marker='o')
-    for label, x, y in zip(Dic.values(), coords[:, 0], coords[:, 1]):
+    for label, x, y in zip(list(Dic.values()), coords[:, 0], coords[:, 1]):
         plt.annotate(
             label,
             xy=(x, y), xytext=(-20, 20),
@@ -111,7 +111,7 @@ def plotPareto(paretoPoints, dominatedPoints):
     ax = fig.add_subplot(111, projection='3d')
     dp = np.array(list(dominatedPoints))
     pp = np.array(list(paretoPoints))
-    print(pp.shape, dp.shape)
+    print((pp.shape, dp.shape))
     ax.scatter(dp[:, 0], dp[:, 1], dp[:, 2])
     ax.scatter(pp[:, 0], pp[:, 1], pp[:, 2], color='red')
 
@@ -195,7 +195,7 @@ def plotsecodnarystructures(rnaString, lista, lista2, n, reactivities):
         ax.add_patch(arc)
         ax.add_patch(arc2)
     cmmapable = cm.ScalarMappable(norm, my_cmap)
-    cmmapable.set_array(range(min_val, max_val))
+    cmmapable.set_array(list(range(min_val, max_val)))
     colorbar(cmmapable, fraction=0.046, pad=0.04, ticks=[0, 0.5, 1])
 
     fontProp = mp.font_manager.FontProperties(family="monospace", style="normal", weight="bold", size="8")
@@ -224,8 +224,8 @@ def plotClusteringDistribution(lenconstraint, Folder_name, Lenrna):
     D = SF.Eucledian_distance(B, Lenrna)
     # D = SF.Absolute_distance(B, Lenrna)
     # tril for lower triangular matrix
-    print Dic.values()
-    print D
+    print(list(Dic.values()))
+    print(D)
     # Clustering process with th plot
     adist = np.array(D)
     amax = np.amax(adist)
@@ -238,7 +238,7 @@ def plotClusteringDistribution(lenconstraint, Folder_name, Lenrna):
     fig = plt.figure()
     plt.subplots_adjust(bottom=0.1)
     plt.scatter(coords[:, 0], coords[:, 1], marker='o')
-    for label, x, y in zip(Dic.values(), coords[:, 0], coords[:, 1]):
+    for label, x, y in zip(list(Dic.values()), coords[:, 0], coords[:, 1]):
         plt.annotate(
             label,
             xy=(x, y), xytext=(0, 20),
@@ -275,7 +275,7 @@ def HeatMapplot(Distance, labels, ConvertDist):
 
     else:
         nba_sort = Distance
-    print 'conversion done'
+    print('conversion done')
     heatmap = ax.pcolor(nba_sort, cmap=plt.cm.Blues, alpha=1)  # alpha float (0.0 transparent through 1.0 opaque)
 
     # Format
